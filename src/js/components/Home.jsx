@@ -96,12 +96,11 @@ class Home extends Component {
           <span className="spinner-border spinner-border" />
         </span>
       </div>;
-console.log(this.state.validationError)
     const input =
       <input
         type="text"
         className={"form-control" + (this.state.validationError ? " border border-danger" : "")}
-        id="uri"
+        id="restUriInput"
         placeholder="Path to REST service"
         name="collectionInterval"
         value={this.state.uri}
@@ -119,7 +118,7 @@ console.log(this.state.validationError)
         <h2>HAS</h2>
         <form>
           <div className="form-group row">
-            <label htmlFor="inputCollectionInterval" className="col-sm-2 col-form-label">Path to REST service</label>
+            <label htmlFor="restUriInput" className="col-sm-2 col-form-label">Path to REST service</label>
             <div className="col-sm-10">
               {this.state.isEditing || this.state.isSaving ? input : text }
               {this.state.isSaving ? spinner : "" }

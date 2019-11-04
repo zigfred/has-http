@@ -5,7 +5,7 @@ import Select from 'react-select';
 const customStyles = {
   control: (provided, state) => ({
     ...provided,
-    "min-width": "100px"
+    "minWidth": "100px"
   })
 };
 
