@@ -53,6 +53,7 @@ class Home extends Component {
   handleKeyPress(e) {
     if (e.key === 'Enter') {
       this.onSave();
+      e.preventDefault();
     }
   }
 
@@ -68,7 +69,7 @@ class Home extends Component {
       isSaving: true
     });
 
-    axios.get(uri + "/settings").then(() => {
+    axios.get(uri + "/settings", {timeout: 3000}).then(() => {
 
       cookies.set("restUri", uri);
       this.setState({
@@ -77,15 +78,15 @@ class Home extends Component {
       });
     }, () => {
       this.setState({
-        isEditing: !cookies.get('restUri'),
+        isEditing: true,
         isSaving: false,
-        error: 'Can\'t connect to the specified uri'
+        connectionError: true
       });
     });
   }
 
   render() {
-    const error =
+    const connectionError =
       <div className="alert alert-danger" role="alert">
         Can't connect to the specific uri.
       </div>;
@@ -122,7 +123,7 @@ class Home extends Component {
             <div className="col-sm-10">
               {this.state.isEditing || this.state.isSaving ? input : text }
               {this.state.isSaving ? spinner : "" }
-              {this.state.connectionError ? error : "" }
+              {this.state.connectionError ? connectionError : "" }
             </div>
           </div>
         </form>
