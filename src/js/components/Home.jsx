@@ -4,7 +4,7 @@ import Cookies from 'universal-cookie';
 import axios from "axios";
 
 const cookies = new Cookies();
-const uriReg = /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/;
+const uriReg = /^http:\/\/\w+(\.\w+)*(:[0-9]+)?\/?(\/[.\w]*)*$/;
 
 
 class Home extends Component {
@@ -71,6 +71,7 @@ class Home extends Component {
 
     axios.get(uri + "/settings", {timeout: 3000}).then(() => {
 
+      axios.defaults.baseURL = uri;
       cookies.set("restUri", uri);
       this.setState({
         isSaving: false,
