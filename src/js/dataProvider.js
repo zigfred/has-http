@@ -1,5 +1,9 @@
 import axios from "axios";
+import Cookies from 'universal-cookie';
 
+const cookies = new Cookies();
+
+axios.defaults.baseURL = cookies.get("restUri");
 
 const provider = {
   getDataPoints: function() {
