@@ -30,10 +30,7 @@ class DataPointTypes extends Component {
           this.setState({
             data: result.data
           });
-        }).catch((error) => {
-        console.log(error);
-      }
-    );
+        });
   }
 
   addFormHandler(newItem) {
@@ -43,9 +40,6 @@ class DataPointTypes extends Component {
         this.setState({
           data: data
         });
-      })
-      .catch(error => {
-        console.log(error);
       });
   }
 
@@ -71,9 +65,6 @@ class DataPointTypes extends Component {
         this.setState({
           data: data
         });
-      })
-      .catch(error => {
-        console.log(error);
       });
   }
 

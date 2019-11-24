@@ -100,7 +100,6 @@ class Adhoc extends Component {
           this.setState({
             isViewLoading: false
           });
-          console.log(err)
         });
     }
   }

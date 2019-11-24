@@ -40,10 +40,7 @@ class Arduinos extends Component {
           this.setState({
             data: result.data
           });
-        }).catch((error) => {
-        console.log(error);
-      }
-    );
+      });
   }
 
   addFormHandler(newItem) {
@@ -53,9 +50,6 @@ class Arduinos extends Component {
         this.setState({
           data: data
         });
-      })
-      .catch(error => {
-        console.log(error);
       });
   }
 

@@ -51,9 +51,6 @@ class LoadDialog extends Component {
         this.setState({
           filters: filters
         });
-      })
-      .catch(err => {
-        console.log(err);
       });
   }
 

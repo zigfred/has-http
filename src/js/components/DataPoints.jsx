@@ -54,8 +54,7 @@ class DataPoints extends Component {
           dataPoints: response[0].data,
           tableConfig: this.tableConfig(response[1].data)
         });
-      })
-      .catch(error => console.log(error));
+      });
   }
 
   addFormHandler(newItem) {
@@ -65,9 +64,6 @@ class DataPoints extends Component {
         this.setState({
           dataPoints: data
         });
-      })
-      .catch(error => {
-        console.log(error);
       });
   }
 

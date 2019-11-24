@@ -156,9 +156,6 @@ class Filters extends Component {
       .then(() => {
         // TODO notify result
         this.props.history.push('/adhoc/' + name);
-      })
-      .catch(err => {
-        console.log(err);
       });
   }
 

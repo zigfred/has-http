@@ -5,6 +5,13 @@ const cookies = new Cookies();
 
 axios.defaults.baseURL = cookies.get("restUri");
 
+axios.interceptors.response.use(function (response) {
+  return response;
+}, function (error) {
+  console.log(error);
+  return Promise.reject(error);
+});
+
 const provider = {
   getDataPoints: function() {
     return axios.get("/dataPoints");
