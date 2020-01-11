@@ -25,6 +25,7 @@ class LineChart extends Component {
       .reduce((result, dataPoint) => {
         result[dataPoint.address] = {
           name: dataPoint.label,
+          dataPointType: dataPoint.type.type || 'no-type',
           columns: ["time", dataPoint.address],
           points: []
         };
@@ -57,7 +58,7 @@ class LineChart extends Component {
     Object.keys(timeSeriesProperties).forEach((address) => {
 
       chartConfig.charts[address] = {
-        axisName: "temp",
+        axisName: timeSeriesProperties[address].dataPointType,
         series: new TimeSeries(timeSeriesProperties[address]),
         columns: [address]
       };
@@ -71,6 +72,23 @@ class LineChart extends Component {
       })
     });
     chartConfig.styler = styler(stylerData);
+
+    chartConfig.axes = this.props.selectedDataPoints.reduce((axes, selectedDataPoint) => {
+      const dataPointType = selectedDataPoint.type;
+      const { type = 'no-type', name = 'undefined', units = '?', dataRangeMin = 0, dataRangeMax = 100 } = dataPointType;
+
+      if (!axes[type]) {
+        axes[dataPointType.type] = {
+          id: type,
+          label: name + ', ' + units,
+          min: dataRangeMin,
+          max: dataRangeMax,
+          format: ',.1f'
+        }
+      }
+
+      return axes;
+    }, {});
 
     return chartConfig;
   }

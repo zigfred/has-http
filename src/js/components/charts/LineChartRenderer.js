@@ -20,6 +20,7 @@ class LineChartRenderer extends React.Component {
       y: null
     };
     this.createCharts = this.createCharts.bind(this);
+    this.createAxes = this.createAxes.bind(this);
     this.handleTrackerChanged = this.handleTrackerChanged.bind(this);
     this.handleMouseMove = this.handleMouseMove.bind(this);
   }
@@ -37,6 +38,27 @@ class LineChartRenderer extends React.Component {
       );
     });
   }
+  createAxes(axes) {
+    const components = Object.keys(axes).map(axisId => {
+      const axis = axes[axisId];
+      return (
+        <YAxis
+          key={axis.id}
+          id={axis.id}
+          label={axis.label}
+          labelOffset={5}
+          //style={stylerData.axisStyle("temp-in38")}
+          min={axis.min}
+          max={axis.max}
+          width="80"
+          type="linear"
+          format=",.1f"
+        />
+      );
+    });
+
+    return components;
+  };
 
   handleTrackerChanged(tracker) {
     if (!tracker) {
@@ -59,6 +81,7 @@ class LineChartRenderer extends React.Component {
     if (!chartConfig || !Object.keys(chartConfig.charts).length) return null;
 
     const charts = this.createCharts(chartConfig.charts);
+    const axes = this.createAxes(chartConfig.axes);
 
     if (this.state.tracker) {
       chartConfig.legend.categories.forEach((category => {
@@ -85,17 +108,7 @@ class LineChartRenderer extends React.Component {
                     {charts}
                     <CrossHairs x={this.state.x} y={this.state.y} />
                   </Charts>
-                  <YAxis
-                    id="temp"
-                    label="Temperature (°C)"
-                    labelOffset={5}
-                    //style={stylerData.axisStyle("temp-in38")}
-                    min={5}
-                    max={90}
-                    width="80"
-                    type="linear"
-                    format=",.1f"
-                  />
+                  {axes}
                 </ChartRow>
               </ChartContainer>
             </Resizable>
