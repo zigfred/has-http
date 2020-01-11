@@ -84,7 +84,7 @@ class Filters extends Component {
   }
 
   onSelectionChange(selected) {
-    const selectedIds = selected.map(item => item.value);
+    const selectedIds = selected && selected.map(item => item.value) || [];
     const dataPoints = this.state.dataPoints.map(item => {
       item.selected = selectedIds.includes(item._id);
       return item;
