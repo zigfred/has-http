@@ -8,12 +8,11 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
 import Select from 'react-select';
-import {Button, ButtonGroup} from "react-bootstrap";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import { Button, ButtonGroup } from "react-bootstrap";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const VIEW_TYPE_TABLE = "table";
 const VIEW_TYPE_CHART = "chart";
-
 
 class Filters extends Component {
   constructor(props) {
@@ -74,6 +73,7 @@ class Filters extends Component {
     }
   }
 
+  //TODO implement refresh action
   onApplyFilters() {
     this.props.onApplyFilters({
       selectedDataPoints: this.state.dataPoints.filter(item => item.selected),
@@ -145,6 +145,7 @@ class Filters extends Component {
       showSaveDialog: false
     });
 
+    //TODO save view type
     dataProvider.saveFilters({
       name: name,
       filters: {
@@ -192,6 +193,7 @@ class Filters extends Component {
         <LoadDialog
           keyboard={true}
           show={this.state.showLoadDialog}
+          //TODO implement onDeleteFilters
           onDelete={this.onDeleteFilters}
           onCloseLoad={this.closeLoadDialog}
         />
