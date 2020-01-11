@@ -14,6 +14,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 const VIEW_TYPE_TABLE = "table";
 const VIEW_TYPE_CHART = "chart";
 
+//TODO implement time range filters
 class Filters extends Component {
   constructor(props) {
     super(props);

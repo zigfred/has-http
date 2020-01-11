@@ -19,6 +19,22 @@ class DataPointTypes extends Component {
         label: "Name",
         name: "name",
         type: String
+      }, {
+        label: "Units",
+        name: "units",
+        type: String
+      }, {
+        label: "Type",
+        name: "type",
+        type: String
+      }, {
+        label: "Data range min",
+        name: "dataRangeMin",
+        type: String
+      }, {
+        label: "Data range max",
+        name: "dataRangeMax",
+        type: String
       }]
     };
   }
