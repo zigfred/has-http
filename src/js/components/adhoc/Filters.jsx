@@ -205,7 +205,7 @@ class Filters extends Component {
             showTimeSelect
             timeFormat="HH:mm"
             timeIntervals={15}
-            dateFormat="yyyy MMM dd hh:mm"
+            dateFormat="yyyy MMM dd HH:mm"
             timeCaption="time"
             selectsStart
             startDate={this.state.startDate}
@@ -220,7 +220,7 @@ class Filters extends Component {
             showTimeSelect
             timeFormat="HH:mm"
             timeIntervals={15}
-            dateFormat="yyyy MMM dd hh:mm"
+            dateFormat="yyyy MMM dd HH:mm"
             timeCaption="time"
             selectsEnd
             startDate={this.state.startDate}
