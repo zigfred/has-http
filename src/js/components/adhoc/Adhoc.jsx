@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import Filters from "./Filters"
+import Filters from "./filters/Filters"
 import LineChart from "../charts/LineChart"
 import dataProvider from "../../dataProvider";
 import ProgressBar from "react-bootstrap/ProgressBar";

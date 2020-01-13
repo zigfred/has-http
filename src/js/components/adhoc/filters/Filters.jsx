@@ -1,11 +1,9 @@
 import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
-import dataProvider from "../../dataProvider";
-import SaveDialog from './SaveDialog';
-import LoadDialog from './LoadDialog';
-
-import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
+import dataProvider from "../../../dataProvider";
+import SaveDialog from '../SaveDialog';
+import LoadDialog from '../LoadDialog';
+import TimeFilterContainer from './TimeFilterContainer';
 
 import Select from 'react-select';
 import { Button, ButtonGroup } from "react-bootstrap";
@@ -23,8 +21,14 @@ class Filters extends Component {
       showLoadDialog: false,
 
       dataPoints: this.props.dataPoints,
-      startDate: new Date(((new Date()) - 1000 * 60 * 60 * 24 * 5)),
+      startDate: new Date(((new Date()) - 1000 * 60 * 60 * 24)),
       endDate: new Date(),
+      relativeDate: {
+        days: 0,
+        hours: 0,
+        minutes: 0
+      },
+      isRelativeDate: true,
       reports: []
     };
 
@@ -40,6 +44,8 @@ class Filters extends Component {
     this.onSave = this.onSave.bind(this);
     this.openLoadDialog = this.openLoadDialog.bind(this);
     this.closeLoadDialog = this.closeLoadDialog.bind(this);
+    this.switchFilterType = this.switchFilterType.bind(this);
+    this.onRelativeFilterChange = this.onRelativeFilterChange.bind(this);
   }
 
   componentWillReceiveProps(nextProps, nextContext) {
@@ -58,6 +64,12 @@ class Filters extends Component {
       dataProvider.getFilter(filter)
 
         .then(response => {
+          const relativeDateInitial = {
+            days: 0,
+            hours: 0,
+            minutes: 0
+          };
+
           const selectedIds = response.data.filters.dataPoints;
           const dataPoints = this.state.dataPoints.map(item => {
             item.selected = selectedIds.includes(item._id);
@@ -68,6 +80,8 @@ class Filters extends Component {
             dataPoints: dataPoints,
             startDate: new Date(response.data.filters.startDate),
             endDate: new Date(response.data.filters.endDate),
+            relativeDate: response.data.filters.relativeDate || relativeDateInitial,
+            isRelativeDate: response.data.filters.isRelativeDate
           });
 
         });
@@ -79,7 +93,9 @@ class Filters extends Component {
     this.props.onApplyFilters({
       selectedDataPoints: this.state.dataPoints.filter(item => item.selected),
       startDate: this.state.startDate,
-      endDate: this.state.endDate
+      endDate: this.state.endDate,
+      relativeDate: this.state.relativeDate,
+      isRelativeDate: this.state.isRelativeDate
     });
   }
 
@@ -153,6 +169,8 @@ class Filters extends Component {
         dataPoints: this.state.dataPoints.filter(item => item.selected).map(item => item._id),
         startDate: this.state.startDate,
         endDate: this.state.endDate,
+        relativeDate: this.state.relativeDate,
+        isRelativeDate: this.state.isRelativeDate,
       }
     })
       .then(() => {
@@ -171,7 +189,19 @@ class Filters extends Component {
       showLoadDialog: false
     });
   }
-
+  switchFilterType() {
+    this.setState({
+      isRelativeDate: !this.state.isRelativeDate
+    })
+  }
+  onRelativeFilterChange(data) {
+    this.setState({
+      relativeDate: {
+        ...this.state.relativeDate,
+        ...data
+      }
+    })
+  }
 
   render() {
     const pauseFilters = this.props.pauseFilters;
@@ -198,36 +228,16 @@ class Filters extends Component {
           onDelete={this.onDeleteFilters}
           onCloseLoad={this.closeLoadDialog}
         />
-        <div className="col-md-auto">
-          <DatePicker
-            selected={this.state.startDate}
-            onChange={this.handleDatePickerStartChange}
-            showTimeSelect
-            timeFormat="HH:mm"
-            timeIntervals={15}
-            dateFormat="yyyy MMM dd HH:mm"
-            timeCaption="time"
-            selectsStart
-            startDate={this.state.startDate}
-            endDate={this.state.endDate}
-            shouldCloseOnSelect={false}
-          />
-        </div>
-        <div className="col-md-auto">
-          <DatePicker
-            selected={this.state.endDate}
-            onChange={this.handleDatePickerEndChange}
-            showTimeSelect
-            timeFormat="HH:mm"
-            timeIntervals={15}
-            dateFormat="yyyy MMM dd HH:mm"
-            timeCaption="time"
-            selectsEnd
-            startDate={this.state.startDate}
-            endDate={this.state.endDate}
-            shouldCloseOnSelect={false}
-          />
-        </div>
+        <TimeFilterContainer
+          handleDatePickerStartChange={this.handleDatePickerStartChange}
+          handleDatePickerEndChange={this.handleDatePickerEndChange}
+          startDate={this.state.startDate}
+          endDate={this.state.endDate}
+          relativeDate={this.state.relativeDate}
+          isRelativeDate={this.state.isRelativeDate}
+          switchFilterType={this.switchFilterType}
+          onRelativeFilterChange={this.onRelativeFilterChange}
+        />
         <div className="col">{this.checkboxList()}</div>
         <div className="col-md-auto">
           <Button
@@ -237,8 +247,6 @@ class Filters extends Component {
           >
             {pauseFilters ? 'Loading…' : 'Apply'}
           </Button>
-        </div>
-        <div className="col-md-auto">
           <div className="btn-group btn-group-toggle">
             <label className={isChartActive ? activeStyles : inactiveStyles}>
               <input type="radio" name="viewType" value={VIEW_TYPE_CHART} onChange={this.props.onChangeViewType}/>
@@ -255,8 +263,6 @@ class Filters extends Component {
               />
             </label>
           </div>
-        </div>
-        <div className="col-md-auto">
           <ButtonGroup>
             <Button variant="info" onClick={this.openSaveDialog}>
               <FontAwesomeIcon icon="save"/>

@@ -46,3 +46,10 @@ progress-chart
 .progress-chart {
     height: 5px;
 }
+
+/*
+relative date inputs width
+ */
+.relative-date {
+    width: 120px;
+}
