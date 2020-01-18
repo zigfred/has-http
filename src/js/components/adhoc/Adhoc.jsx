@@ -47,7 +47,9 @@ class Adhoc extends Component {
     const oldFilters = {
       selectedDataPoints: this.state.selectedDataPoints,
       startDate: this.state.startDate,
-      endDate: this.state.endDate
+      endDate: this.state.endDate,
+      relativeDate: this.state.relativeDate,
+      isRelativeDate: this.state.isRelativeDate
     };
 
     if (JSON.stringify(oldFilters) !== JSON.stringify(filters)) {
@@ -88,7 +90,9 @@ class Adhoc extends Component {
       dataProvider.getCollectorsData({
         address: filters.selectedDataPoints.map(dataPoint => dataPoint.address),
         startDate: filters.startDate,
-        endDate: filters.endDate
+        endDate: filters.endDate,
+        relativeDate: filters.relativeDate,
+        isRelativeDate: filters.isRelativeDate
       })
         .then(response => {
           this.setState({
