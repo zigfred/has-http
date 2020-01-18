@@ -49,7 +49,7 @@ class LineChart extends Component {
       legend: {
         categories: []
       },
-      timerange: new TimeRange([this.props.chartConfig.startDate.getTime(), this.props.chartConfig.endDate.getTime()]),
+      timerange: new TimeRange([this.props.chartConfig.startTime, this.props.chartConfig.endTime]),
       styler: null
     };
     const stylerData = [];

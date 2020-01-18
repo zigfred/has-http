@@ -137,8 +137,8 @@ class Adhoc extends Component {
             data={this.state.viewData}
             selectedDataPoints={this.state.selectedDataPoints}
             chartConfig={{
-              startDate: this.state.startDate,
-              endDate: this.state.endDate
+              startTime: calcStartTime(this.state),
+              endTime: this.state.isRelativeDate ? +new Date() : this.state.endDate.getTime()
             }}
           />
         );
@@ -170,3 +170,25 @@ class Adhoc extends Component {
 }
 
 export default Adhoc;
+
+function calcStartTime ({ startDate, isRelativeDate, relativeDate }) {
+  if (startDate && !isRelativeDate) {
+    return startDate.getTime();
+  } else {
+    const { days, hours, minutes } = relativeDate;
+    let shiftMs = 0;
+    if (minutes) {
+      shiftMs += minutes * 60 * 1000;
+    }
+    if (hours) {
+      shiftMs += hours * 60 * 60 * 1000;
+    }
+    if (days) {
+      shiftMs += days * 24 * 60 * 60 * 1000;
+    }
+    if (!shiftMs) {
+      shiftMs = 24 * 60 * 60 * 1000; // one day milliseconds
+    }
+    return +(new Date()) - shiftMs;
+  }
+}
