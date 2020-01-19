@@ -11,6 +11,7 @@ import Arduinos from "./Arduinos";
 import Settings from "./Settings";
 import Charts from "./Charts";
 import Adhoc from "./adhoc/Adhoc";
+import Project1 from './projects/Project1'
 
 class Main extends Component {
   render() {
@@ -37,6 +38,9 @@ class Main extends Component {
               <li className="nav-item">
                 <NavLink className={"nav-link"} to="/adhoc">Ad hoc</NavLink>
               </li>
+              <li className="nav-item">
+                <NavLink className={"nav-link"} to="/projects/project1">Project 1</NavLink>
+              </li>
             </ul>
           </nav>
           <div className="content container-fluid">
@@ -46,6 +50,7 @@ class Main extends Component {
             <Route path="/arduinos" component={Arduinos}/>
             <Route path="/settings" component={Settings}/>
             <Route path="/adhoc/:filter?" component={Adhoc}/>
+            <Route path="/projects/project1" component={Project1}/>
           </div>
         </div>
       </HashRouter>

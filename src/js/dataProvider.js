@@ -70,6 +70,10 @@ const provider = {
 
   getCollectorsData: function(data) {
     return axios.post("/collector", data);
+  },
+
+  getProject1: function (data) {
+    return axios.get("/projects/project1", data);
   }
 };
 
