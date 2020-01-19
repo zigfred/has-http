@@ -151,7 +151,7 @@ class Project1 extends Component {
                       <div className="container">
                         <div className="row">
                           <div className="col-sm">{current}</div>
-                          <div className="col-sm">{row.V*current}</div>
+                          <div className="col-sm">{Math.round(row.V*current*1000)/1000}</div>
                         </div>
                       </div>
                     </td>
