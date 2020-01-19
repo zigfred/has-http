@@ -129,13 +129,13 @@ class Project1 extends Component {
             </button>
           </div>
         </div>
-        <table className="table table-sm">
+        <table className="table table-sm table-bordered">
           <thead>
           <tr>
             <th scope="col">#</th>
             <th scope="col">Description</th>
             <th scope="col">Voltage</th>
-            {this.state.data.length && this.state.data[0].data.map((i, key) => <th scope="col">{key+1}</th>) || ""}
+            {this.state.data.length && this.state.data[0].data.map((i, key) => <th scope="col">{key+1} C/P</th>) || ""}
           </tr>
           </thead>
           <tbody>
@@ -145,7 +145,18 @@ class Project1 extends Component {
                 <th scope="row">{key+1}</th>
                 <td>{row.loadDescription}</td>
                 <td>{row.V}</td>
-                {row.data.map(current => <td>{current}</td>)}
+                {row.data.map(current => {
+                  return(
+                    <td>
+                      <div className="container">
+                        <div className="row">
+                          <div className="col-sm">{current}</div>
+                          <div className="col-sm">{row.V*current}</div>
+                        </div>
+                      </div>
+                    </td>
+                  )
+                })}
               </tr>
             )
           })}
