@@ -87,7 +87,7 @@ class LineChartRenderer extends React.Component {
       chartConfig.legend.categories.forEach((category => {
         const index = chartConfig.charts[category.key].series.bisect(this.state.tracker);
         const trackerEvent = chartConfig.charts[category.key].series.at(index);
-        trackerEvent && (category.value = `°C ${f(trackerEvent.get(category.key))}`);
+        trackerEvent && (category.value = `${category.dataPointTypeUnits} ${f(trackerEvent.get(category.key))}`);
       }));
     }
 

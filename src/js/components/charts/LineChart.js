@@ -26,6 +26,7 @@ class LineChart extends Component {
         result[dataPoint.address] = {
           name: dataPoint.label,
           dataPointType: dataPoint.type.type || 'no-type',
+          dataPointTypeUnits: dataPoint.type.units || "",
           columns: ["time", dataPoint.address],
           points: []
         };
@@ -64,7 +65,8 @@ class LineChart extends Component {
       };
       chartConfig.legend.categories.push({
         key: address,
-        label: timeSeriesProperties[address].name
+        label: timeSeriesProperties[address].name,
+        dataPointTypeUnits: timeSeriesProperties[address].dataPointTypeUnits
       });
       stylerData.push({
         key: address,
