@@ -74,6 +74,16 @@ const provider = {
 
   getProject1: function (data) {
     return axios.get("/projects/project1", data);
+  },
+
+  project2: {
+
+    get: function (data) {
+      return axios.get("/projects/project2", data);
+    },
+    set: function (data) {
+      return axios.post("/projects/project2", data);
+    }
   }
 };
 

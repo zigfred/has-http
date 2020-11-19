@@ -1,6 +1,7 @@
 import dataProvider from "../dataProvider";
 import React, { Component } from "react";
 
+// TODO: add defaultRuleInterval=1000
 class Settings extends Component {
   constructor(props) {
     super(props);
