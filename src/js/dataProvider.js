@@ -13,6 +13,10 @@ axios.interceptors.response.use(function (response) {
 });
 
 const provider = {
+  heartbeat: function() {
+    return axios.get("/");
+  },
+
   getDataPoints: function() {
     return axios.get("/dataPoints");
   },

@@ -4,6 +4,7 @@ import {
   NavLink,
   HashRouter
 } from "react-router-dom";
+import Heartbeat from "./monitor/Heartbeat";
 import Home from "./Home";
 import DataPoints from "./DataPoints";
 import DataPointTypes from "./DataPointTypes";
@@ -44,6 +45,9 @@ class Main extends Component {
               </li>
               <li className="nav-item">
                 <NavLink className={"nav-link"} to="/projects/project2">TT control</NavLink>
+              </li>
+              <li className="nav-item">
+                <Heartbeat/>
               </li>
             </ul>
           </nav>
