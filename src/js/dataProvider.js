@@ -88,6 +88,15 @@ const provider = {
     set: function (data) {
       return axios.post("/projects/project2", data);
     }
+  },
+
+  brControl: {
+    get: function () {
+      return axios.get("/projects/brControl");
+    },
+    set: function (data) {
+      return axios.post("/projects/brControl", data);
+    },
   }
 };
 
