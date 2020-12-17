@@ -14,7 +14,7 @@ import Charts from "./Charts";
 import Adhoc from "./adhoc/Adhoc";
 import Project1 from './projects/Project1';
 import Project2 from './projects/Project2';
-import BRControl from './projects/BRControl';
+import BRControl from './projects/brControl/BRControl';
 
 class Main extends Component {
   render() {

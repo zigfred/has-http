@@ -91,11 +91,14 @@ const provider = {
   },
 
   brControl: {
-    get: function () {
-      return axios.get("/projects/brControl");
+    getData: function () {
+      return axios.get("/projects/brControl/data");
     },
-    set: function (data) {
-      return axios.post("/projects/brControl", data);
+    getCommand: function () {
+      return axios.get("/projects/brControl/command");
+    },
+    setCommand: function (data) {
+      return axios.post("/projects/brControl/command", data);
     },
   }
 };
