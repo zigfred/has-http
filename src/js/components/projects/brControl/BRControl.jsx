@@ -20,7 +20,7 @@ export function BRControl (props) {
   const fetchBRData = () => {
     dataProvider.brControl.getData().then(result => {
       const { data } = result.data;
-      setLastData(data);
+      setLastData(data || {});
     });
   }
 

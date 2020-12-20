@@ -16,10 +16,10 @@ export function commandEffect() {
     const fetchBRCommand = () => {
       dataProvider.brControl.getCommand().then(result => {
         const newState = new BRCommandPresenter(state)
-          .setCommand(result.data)
+          .setCommand(result.data || {})
           .toState();
         setState(newState);
-        setServerCommandState(result.data);
+        setServerCommandState(result.data || {});
       });
     }
     fetchBRCommand();
