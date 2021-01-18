@@ -176,6 +176,9 @@ class Project2 extends Component {
           </div>
 
         </form>
+        <div>
+          Manual servo position: open 0 - 155 close.
+        </div>
         {!Object.keys(collector).length && (
           <div className="alert alert-danger" role="alert">
             No data from TT arduino!
