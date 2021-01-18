@@ -8,6 +8,7 @@ class Project2 extends Component {
     this.state = {
       collector: {},
       command: {},
+      missed: {},
       manualValue: 0,
       isManualValueValid: false
     };
@@ -29,6 +30,17 @@ class Project2 extends Component {
     dataProvider.project2.get({})
     .then(result => {
       const { collector, command } = result.data;
+
+      const keys = Object.keys(this.state.collector);
+      const missed = keys.reduce((result, key, ) => {
+        if (!collector.data || (typeof collector.data[key] === undefined)) {
+          result[key] = (this.state.missed[key] + 1) || 1;
+        } else {
+          result[key] = 0;
+        }
+        return result;
+      }, {});
+
       this.setState({
         collector: {
           ...this.state.collector,
@@ -37,7 +49,8 @@ class Project2 extends Component {
         command: {
           ...this.state.command,
           ...command
-        }
+        },
+        missed
       });
     });
   }
@@ -100,7 +113,7 @@ class Project2 extends Component {
   }
 
   render() {
-    const { collector, command, manualValue, logTime } = this.state;
+    const { collector, command, manualValue, logTime, missed } = this.state;
     const connectionError =
       <div className="alert alert-danger" role="alert">
         Can't connect to the specific uri.
@@ -129,7 +142,7 @@ class Project2 extends Component {
                 type="button"
                 disabled={!this.state.isManualValueValid}
                 onClick={this.handleManualButton}>
-                {'Set manual'}
+                {'Set manual servo pos.'}
               </button>
             </div>
             <input
@@ -141,7 +154,7 @@ class Project2 extends Component {
 
           <div className="input-group input-group-sm mb-3">
             <div className="input-group-prepend">
-              <span className="input-group-text">Auto: </span>
+              <span className="input-group-text">Auto calculated angle: </span>
             </div>
             <input
               type="text"
@@ -173,7 +186,14 @@ class Project2 extends Component {
           {Object.entries(collector).map(([key, val]) => {
             return (
               <tr key={key}>
-                <td>{key}</td>
+                <td>
+                  {key}
+                  <div className="float-right">
+                    <span className="badge badge-warning">
+                      {missed[key] || null}
+                    </span>
+                  </div>
+                </td>
                 <td>{val}</td>
               </tr>
             )
