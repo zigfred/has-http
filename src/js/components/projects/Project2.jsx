@@ -177,7 +177,7 @@ class Project2 extends Component {
 
         </form>
         <div>
-          Manual servo position: open 0 - 155 close.
+          Manual servo position: open 1 - 155 close.
         </div>
         {!Object.keys(collector).length && (
           <div className="alert alert-danger" role="alert">
