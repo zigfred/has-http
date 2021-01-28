@@ -9,8 +9,8 @@ class Project2 extends Component {
       collector: {},
       command: {},
       missed: {},
-      manualValue: 0,
-      isManualValueValid: false
+      manualValue: 1,
+      isManualValueValid: true
     };
 
     this.getData = this.getData.bind(this);
