@@ -80,13 +80,13 @@ const provider = {
     return axios.get("/projects/project1", data);
   },
 
-  project2: {
+  bwControl: {
 
     get: function (data) {
-      return axios.get("/projects/project2", data);
+      return axios.get("/projects/bwControl", data);
     },
     set: function (data) {
-      return axios.post("/projects/project2", data);
+      return axios.post("/projects/bwControl", data);
     }
   },
 

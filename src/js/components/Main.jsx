@@ -13,7 +13,7 @@ import Settings from "./Settings";
 import Charts from "./Charts";
 import Adhoc from "./adhoc/Adhoc";
 import Project1 from './projects/Project1';
-import Project2 from './projects/Project2';
+import BWControl from './projects/bwControl/BWControl';
 import BRControl from './projects/brControl/BRControl';
 
 class Main extends Component {
@@ -45,7 +45,7 @@ class Main extends Component {
                 <NavLink className={"nav-link"} to="/projects/project1">Project 1</NavLink>
               </li>
               <li className="nav-item">
-                <NavLink className={"nav-link"} to="/projects/project2">TT control</NavLink>
+                <NavLink className={"nav-link"} to="/projects/BWControl">BW</NavLink>
               </li>
               <li className="nav-item">
                 <NavLink className={"nav-link"} to="/projects/BRControl">BR</NavLink>
@@ -63,7 +63,7 @@ class Main extends Component {
             <Route path="/settings" component={Settings}/>
             <Route path="/adhoc/:filter?" component={Adhoc}/>
             <Route path="/projects/project1" component={Project1}/>
-            <Route path="/projects/project2" component={Project2}/>
+            <Route path="/projects/BWControl" component={BWControl}/>
             <Route path="/projects/BRControl" component={BRControl}/>
           </div>
         </div>

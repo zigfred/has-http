@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-import dataProvider from "../../dataProvider";
+import dataProvider from "../../../dataProvider";
 
-class Project2 extends Component {
+class BWControl extends Component {
 
   constructor(props) {
     super(props);
@@ -27,7 +27,7 @@ class Project2 extends Component {
   }
 
   getData() {
-    dataProvider.project2.get({})
+    dataProvider.bwControl.get({})
     .then(result => {
       const { collector, command } = result.data;
 
@@ -56,7 +56,7 @@ class Project2 extends Component {
   }
 
   saveDate(data) {
-    dataProvider.project2.set(data).then(result => {
+    dataProvider.bwControl.set(data).then(result => {
       this.setState({
         command: {
           ...this.state.command,
@@ -208,4 +208,4 @@ class Project2 extends Component {
   }
 }
 
-export default Project2;
+export default BWControl;
