@@ -90,16 +90,26 @@ const provider = {
     }
   },
 
+  command: {
+    getCommand: function (alias) {
+      return axios.get("/projects/command/" + alias);
+    },
+    setCommand: function (data) {
+      return axios.post("/projects/command", data);
+    },
+  },
+
+  // TODO: use getCollectorData endpoint
   brControl: {
     getData: function () {
       return axios.get("/projects/brControl/data");
-    },
-    getCommand: function () {
-      return axios.get("/projects/brControl/command");
-    },
-    setCommand: function (data) {
-      return axios.post("/projects/brControl/command", data);
-    },
+    }
+  },
+
+  bdControl: {
+    getData: function () {
+      return axios.get("/projects/bdControl/data");
+    }
   }
 };
 

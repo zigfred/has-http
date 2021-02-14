@@ -1,0 +1,7 @@
+.heaterCommand .react-datepicker__input-container input {
+    width: 50px;
+}
+
+.heaterCommand .cursor-pointer {
+    cursor: pointer;
+}

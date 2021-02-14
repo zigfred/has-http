@@ -1,5 +1,6 @@
 import React, { Fragment } from 'react'
 import DatePicker from 'react-datepicker';
+import HeaterSwitcher from './HeaterSwitcher'
 
 export function Period (props) {
   const {
@@ -10,26 +11,42 @@ export function Period (props) {
 
   const {
     startTime,
-    stopTime
+    stopTime,
+    heaterSwitcher,
+    run,
+    cost
   } = period;
 
   const onChangeStart = (date) => {
     onChange({
-      startTime: date,
-      stopTime
+      ...period,
+      startTime: date
     });
   }
   const onChangeStop = (date) => {
     onChange({
-      startTime,
+      ...period,
       stopTime: date
+    });
+  }
+
+  const onChangeHeaterSwitcher = (heaterSwitcher) => {
+    onChange({
+      ...period,
+      heaterSwitcher
+    });
+  }
+
+  const toggleRun = () => {
+    onChange({
+      ...period,
+      run: !run
     });
   }
 
   return (
     <Fragment>
-      <span className={'mr-3'}>
-        Start time:
+      <td>
         <DatePicker
           selected={startTime}
           onChange={onChangeStart}
@@ -43,9 +60,8 @@ export function Period (props) {
           shouldCloseOnSelect={true}
           disabled={disabled}
         />
-      </span>
-      <span className={'mr-3'}>
-        Stop time:
+      </td>
+      <td>
         <DatePicker
           selected={stopTime}
           onChange={onChangeStop}
@@ -59,7 +75,22 @@ export function Period (props) {
           shouldCloseOnSelect={true}
           disabled={disabled}
         />
-      </span>
+      </td>
+      <td>
+        <div className="d-inline-block btn-group-toggle" data-toggle="buttons">
+          <label className={run ? 'btn btn-sm btn-success' : 'btn btn-sm btn-outline-secondary'}>
+            <input type="checkbox" onChange={() => toggleRun(0)}/> Run
+          </label>
+        </div>
+      </td>
+      <td>
+        <HeaterSwitcher
+          heaterSwitcher={heaterSwitcher}
+          onChange={onChangeHeaterSwitcher}/>
+      </td>
+        <td>
+          {cost}
+        </td>
     </Fragment>
   )
 }
