@@ -110,6 +110,14 @@ const provider = {
     getData: function () {
       return axios.get("/projects/bdControl/data");
     }
+  },
+
+  wf: {
+    owm: {
+      getData: function () {
+        return axios.get("/wf/owm");
+      }
+    }
   }
 };
 

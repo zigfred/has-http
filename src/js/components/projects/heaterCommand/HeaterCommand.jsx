@@ -18,6 +18,7 @@ export function HeaterCommand(props) {
       isInvalidPeriod,
       isInvalidHeaterSwitcher,
       isNotOptimal,
+      totalHeat,
       totalCost
     },
     addPeriod,
@@ -44,6 +45,9 @@ export function HeaterCommand(props) {
               disabled={isInvalidPeriod || isInvalidHeaterSwitcher}
               id="customSwitch1"/>
               <label className="custom-control-label" htmlFor="customSwitch1">Enabled</label>
+          </div>
+          <div className="col-auto custom-control custom-switch">
+            Total heat: {totalHeat}
           </div>
           <div className="col-auto custom-control custom-switch">
             Total cost: {totalCost}

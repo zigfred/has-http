@@ -12,6 +12,7 @@ export function Periods(props) {
           <th>Stop time</th>
           <th>Run</th>
           <th>Heaters</th>
+          <th>Heat</th>
           <th>Cost</th>
           <th>Remove</th>
         </tr>

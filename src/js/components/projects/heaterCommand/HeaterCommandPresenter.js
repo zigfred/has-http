@@ -36,6 +36,7 @@ export class HeaterCommandPresenter {
   }
 
   toState() {
+    this._calcHeatForPeriods();
     this._calcCostForPeriods();
 
     return {
@@ -43,6 +44,7 @@ export class HeaterCommandPresenter {
       isInvalidPeriod: this.isInvalidPeriod(),
       isInvalidHeaterSwitcher: this.isInvalidHeaterSwitcher(),
       isNotOptimal: this.isNotOptimal(),
+      totalHeat: this.calcTotalHeat(),
       totalCost: this.calcTotalCost()
     };
   }
@@ -240,6 +242,7 @@ export class HeaterCommandPresenter {
           stopTime: new Date(stopTime),
           run: period.run,
           heaterSwitcher: period.heaterSwitcher || [],
+          heat: this._calcHeatForPeriod(period),
           cost: this._calcCostForPeriod(period)
         }
       });
@@ -252,6 +255,45 @@ export class HeaterCommandPresenter {
         periods
       }
     };
+  }
+
+  _calcHeatForPeriods() {
+    this.state.periods = this.state.periods.map(period => {
+      return {
+        ...period,
+        heat: this._calcHeatForPeriod(period)
+      }
+    });
+  }
+
+  // TODO: range intersections - add validation
+  _calcHeatForPeriod(period) {
+    const isInvalid = this._validatePeriod(period);
+    if (isInvalid) {
+      return false;
+    }
+
+    const { heaters } = this.state;
+    const { startTime, stopTime, run, heaterSwitcher } = period;
+
+    if (!run || !heaterSwitcher.some(switcher => switcher)) {
+      return false;
+    }
+
+    const startTimeDate = new Date(startTime);
+    const stopTimeDate = new Date(stopTime);
+    const startMinute = startTimeDate.getHours() * 60 + startTimeDate.getMinutes();
+    const stopMinute = stopTimeDate.getHours() * 60 + stopTimeDate.getMinutes();
+    const hours = (stopMinute - startMinute) / 60;
+
+    const power = heaters.reduce((memo, power, index) => {
+      return memo + (heaterSwitcher[index] ? power / 1000 : 0);
+    }, 0);
+
+    let heat = hours * power;
+    heat = heat.toFixed(2);
+
+    return heat;
   }
 
   _calcCostForPeriods() {
@@ -330,9 +372,16 @@ export class HeaterCommandPresenter {
     return cost;
   }
 
+  calcTotalHeat() {
+    const total = this.state.periods.reduce((memo, period) => {
+      return memo + (parseFloat(period.heat) || 0);
+    }, 0);
+    return total.toFixed(2);
+  }
+
   calcTotalCost() {
     const total = this.state.periods.reduce((memo, period) => {
-      return memo + parseFloat(period.cost);
+      return memo + (parseFloat(period.cost) || 0);
     }, 0);
     return total.toFixed(2);
   }

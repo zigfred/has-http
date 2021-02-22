@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import dataProvider from '../../../dataProvider';
 import 'react-datepicker/dist/react-datepicker.css';
-import { HeaterCommand } from '../heaterCommand'
-
+import { HeaterCommand } from '../heaterCommand';
+import { WeatherTable} from './WeatherTable';
 
 export function BDControl (props) {
   const [lastData, setLastData] = useState({});
@@ -38,7 +38,7 @@ export function BDControl (props) {
           TA wall: {lastData['28ff14170117035e']}<br/>
           FLOW: {lastData['bd-flow']}<br/>
         </p>
-        <table className="table table-bordered">
+        <table className="table table-bordered table-sm">
           <tbody>
             <tr>
               <td>
@@ -59,7 +59,7 @@ export function BDControl (props) {
           </tr>
           </tbody>
         </table>
-        <hr/>
+        <WeatherTable/>
       </div>
       <div>
         <HeaterCommand alias='bd'/>

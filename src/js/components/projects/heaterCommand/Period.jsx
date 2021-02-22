@@ -14,7 +14,8 @@ export function Period (props) {
     stopTime,
     heaterSwitcher,
     run,
-    cost
+    cost,
+    heat
   } = period;
 
   const onChangeStart = (date) => {
@@ -88,6 +89,9 @@ export function Period (props) {
           heaterSwitcher={heaterSwitcher}
           onChange={onChangeHeaterSwitcher}/>
       </td>
+        <td>
+          {heat}
+        </td>
         <td>
           {cost}
         </td>
