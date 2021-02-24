@@ -6,7 +6,7 @@ export function WeatherTable(props) {
 
   const fetchData = () => {
     dataProvider.wf.owm.getData().then(result => {
-      const { data } = result;
+      const { data: { data } } = result;
       setData(data || []);
     });
   }

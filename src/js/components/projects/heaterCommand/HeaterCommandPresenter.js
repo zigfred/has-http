@@ -1,3 +1,5 @@
+import _ from 'lodash';
+
 export class HeaterCommandPresenter {
   static create(state) {
     return new HeaterCommandPresenter(state);
@@ -6,6 +8,7 @@ export class HeaterCommandPresenter {
     this.state = {
       alias: state.alias,
       enabled: state.enabled || false,
+      skynet: state.skynet || false,
       periods: state.periods || [],
       heaters: state.heaters
     };
@@ -18,6 +21,7 @@ export class HeaterCommandPresenter {
     this.state = {
       alias: command.alias,
       enabled: command.enabled || false,
+      skynet: command.settings.skynet || false,
       periods: convertedCommand.settings.periods,
       heaters: command.settings.heaters
     };
@@ -30,7 +34,8 @@ export class HeaterCommandPresenter {
       alias: this.getAlias(),
       settings: {
         periods: this.getPeriods(),
-        heaters: this.getHeaters()
+        heaters: this.getHeaters(),
+        skynet: this.getSkynet()
       }
     }
   }
@@ -53,6 +58,10 @@ export class HeaterCommandPresenter {
     return this.state.enabled;
   }
 
+  getSkynet() {
+    return this.state.skynet;
+  }
+
   getAlias() {
     return this.state.alias;
   }
@@ -62,8 +71,8 @@ export class HeaterCommandPresenter {
 
     return periods.map(period => {
       return {
-        startTime: period.startTime,
-        stopTime: period.stopTime,
+        startTime: period.startTime.toISOString(),
+        stopTime: period.stopTime.toISOString(),
         run: period.run,
         heaterSwitcher: period.heaterSwitcher
       }
@@ -152,6 +161,11 @@ export class HeaterCommandPresenter {
     return this;
   }
 
+  toggleSkynet() {
+    this.state.skynet = !this.state.skynet;
+    return this;
+  }
+
   toggleEnabled() {
     this.state.enabled = !this.state.enabled;
     return this;
@@ -167,7 +181,7 @@ export class HeaterCommandPresenter {
     delete serverState._id;
     delete serverState.isManualMode;
 
-    return JSON.stringify(serverState) !== JSON.stringify(command);
+    return !_.isEqual(serverState, command);
   }
 
   _validateHeaterSwitcher() {

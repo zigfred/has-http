@@ -73,6 +73,13 @@ export function commandEffect(alias) {
     setState(newState);
   }
 
+  const setSkynet = () => {
+    const newState = new HeaterCommandPresenter(state)
+      .toggleSkynet()
+      .toState();
+    setState(newState);
+  }
+
   const handleCommandEnable = () => {
     const newState = new HeaterCommandPresenter(state)
       .toggleEnabled()
@@ -100,6 +107,7 @@ export function commandEffect(alias) {
     addHeater,
     removeHeater,
     updateHeaters,
+    setSkynet,
     handleCommandEnable,
     handleSave
   ]

@@ -14,6 +14,7 @@ export function HeaterCommand(props) {
       enabled,
       periods,
       heaters,
+      skynet,
       isModified,
       isInvalidPeriod,
       isInvalidHeaterSwitcher,
@@ -27,6 +28,7 @@ export function HeaterCommand(props) {
     addHeater,
     removeHeater,
     updateHeaters,
+    setSkynet,
     handleCommandEnable,
     handleSave
   ] = commandEffect(alias);
@@ -45,6 +47,15 @@ export function HeaterCommand(props) {
               disabled={isInvalidPeriod || isInvalidHeaterSwitcher}
               id="customSwitch1"/>
               <label className="custom-control-label" htmlFor="customSwitch1">Enabled</label>
+          </div>
+          <div className="col-auto custom-control custom-switch">
+            <input
+              type="checkbox"
+              className="custom-control-input"
+              checked={!!skynet}
+              onChange={setSkynet}
+              id="customSwitch2"/>
+            <label className="custom-control-label" htmlFor="customSwitch2">SkyNet mode</label>
           </div>
           <div className="col-auto custom-control custom-switch">
             Total heat: {totalHeat}
