@@ -113,8 +113,8 @@ export class HeaterCommandPresenter {
 
   addPeriod() {
     this.state.periods.push({
-      startTime: null,
-      stopTime: null,
+      startTime: new Date(),
+      stopTime: new Date(),
       heaterSwitcher: this.state.heaters.map(() => 1),
       run: true
     });
