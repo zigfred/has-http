@@ -23,12 +23,14 @@ export function Heartbeat(props) {
 
     setIsLoading(true);
     dataProvider.heartbeat().then(result => {
-      const { data : { data: powerCheck }} = result;
+      const data = result.data.data;
+      const powerCheck = data && data.powerCheck;
       setIsOnline(result.status === 200);
       setIsPowered(powerCheck);
       setIsLoading(false);
     }).catch(() => {
       setIsOnline(false);
+      setIsPowered(false);
       setIsLoading(false);
     });
   }
