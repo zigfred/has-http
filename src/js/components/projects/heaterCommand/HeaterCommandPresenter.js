@@ -234,10 +234,10 @@ export class HeaterCommandPresenter {
     const { startTime, stopTime } = period;
 
     const startHours = startTime.getHours();
-    const isStartInNotOptimal = [8, 9, 20, 21, 22].includes(startHours);
+    const isStartInNotOptimal = [8, 9, 10, 20, 21].includes(startHours);
     const stopHours = stopTime.getHours();
     const stopMinutes = stopTime.getMinutes();
-    const isStopInNotOptimal = [9, 21, 22].includes(stopHours)
+    const isStopInNotOptimal = [9, 10, 21].includes(stopHours)
       || ([8, 20].includes(stopHours) && stopMinutes > 0)
       || startHours < 8 && stopHours > 8
       || startHours < 20 && stopHours > 20;
