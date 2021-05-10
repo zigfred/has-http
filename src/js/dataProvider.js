@@ -14,7 +14,7 @@ axios.interceptors.response.use(function (response) {
 
 const provider = {
   heartbeat: function() {
-    return axios.get("/");
+    return axios.get("/", { timeout: 2000 });
   },
 
   getDataPoints: function() {

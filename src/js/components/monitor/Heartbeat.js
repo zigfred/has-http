@@ -6,6 +6,7 @@ export function Heartbeat(props) {
   const [isLoading, setIsLoading] = useState(false);
   const [isOnline, setIsOnline] = useState(false);
   const [isPowered, setIsPowered] = useState(false);
+  const [isOnlineStationEuroTank, setIsOnlineStationEuroTank] = useState(false);
 
   useEffect(() => {
     pingHost();
@@ -25,12 +26,15 @@ export function Heartbeat(props) {
     dataProvider.heartbeat().then(result => {
       const data = result.data.data;
       const powerCheck = data && data.powerCheck;
+      const stationEuroTankCheck = data && data.stationEuroTankCheck;
       setIsOnline(result.status === 200);
       setIsPowered(powerCheck);
+      setIsOnlineStationEuroTank(stationEuroTankCheck);
       setIsLoading(false);
     }).catch(() => {
       setIsOnline(false);
       setIsPowered(false);
+      setIsOnlineStationEuroTank(false);
       setIsLoading(false);
     });
   }
@@ -47,6 +51,12 @@ export function Heartbeat(props) {
         <FontAwesomeIcon
           icon='plug'
           color={isPowered ? "green" : "red"}
+        />
+      </span>
+      <span className="pr-1">
+        <FontAwesomeIcon
+          icon='window-maximize'
+          color={isOnlineStationEuroTank ? "green" : "red"}
         />
       </span>
     </div>

@@ -15,7 +15,8 @@ import {
   faFolder,
   faUpload,
   faCity,
-  faPlug
+  faPlug,
+  faWindowMaximize
 } from '@fortawesome/free-solid-svg-icons'
 
 library.add(
@@ -28,7 +29,8 @@ library.add(
   faFolder,
   faUpload,
   faCity,
-  faPlug
+  faPlug,
+  faWindowMaximize
 );
 
 const wrapper = document.getElementById("root");
