@@ -1,6 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import Main from "./js/components/Main.jsx";
+import "./css/bootstrap.min.css";
 import "./css/index.css";
 
 import { library } from '@fortawesome/fontawesome-svg-core'
