@@ -16,6 +16,7 @@ import Project1 from './projects/Project1';
 import BWControl from './projects/bwControl/BWControl';
 import BRControl from './projects/brControl/BRControl';
 import BDControl from './projects/bdControl/BDControl';
+import ETControl from './projects/etControl/ETControl';
 
 class Main extends Component {
   render() {
@@ -55,6 +56,9 @@ class Main extends Component {
                 <NavLink className={"nav-link"} to="/projects/BDControl">BD</NavLink>
               </li>
               <li className="nav-item">
+                <NavLink className={"nav-link"} to="/projects/ETControl">ET</NavLink>
+              </li>
+              <li className="nav-item">
                 <Heartbeat/>
               </li>
             </ul>
@@ -70,6 +74,7 @@ class Main extends Component {
             <Route path="/projects/BWControl" component={BWControl}/>
             <Route path="/projects/BRControl" component={BRControl}/>
             <Route path="/projects/BDControl" component={BDControl}/>
+            <Route path="/projects/ETControl" component={ETControl}/>
           </div>
         </div>
       </HashRouter>

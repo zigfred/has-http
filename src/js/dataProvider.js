@@ -118,6 +118,14 @@ const provider = {
         return axios.get("/wf/owm");
       }
     }
+  },
+  etControl: {
+    getData: function () {
+      return axios.get("/esp/euroTank");
+    },
+    command: function (data) {
+      return axios.put("/esp/euroTank/command", data);
+    }
   }
 };
 
