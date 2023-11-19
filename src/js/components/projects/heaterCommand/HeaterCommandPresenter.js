@@ -321,7 +321,7 @@ export class HeaterCommandPresenter {
 
   // TODO: range intersections - add validation
   _calcCostForPeriod(period) {
-    const ONE_MINUTE_KW_COST = 1.68 / 60;
+    const ONE_MINUTE_KW_COST = 2.64 / 60;
 
     const isInvalid = this._validatePeriod(period);
     if (isInvalid) {
