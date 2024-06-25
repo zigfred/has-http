@@ -71,7 +71,8 @@ export function ETControl(props) {
               <p>
                 Pump run: {collectorData['et-pump-run']}<br/>
                 Fill opened: {collectorData['et-fill-opened']}<br/>
-                Irrigate opened: {collectorData['et-irrigate-opened']}<br/>
+                Irrigate1 opened: {collectorData['et-irrigate1-opened']}<br/>
+                Irrigate2 opened: {collectorData['et-irrigate2-opened']}<br/>
                 Tank full: {collectorData['et-tank-full']}<br/>
                 Tank empty: {collectorData['et-tank-empty']}<br/>
                 Pressure: {collectorData['et-pressure']}<br/>
