@@ -75,6 +75,7 @@ export function ETControl(props) {
                 Irrigate2 opened: {collectorData['et-irrigate2-opened']}<br/>
                 Tank full: {collectorData['et-tank-full']}<br/>
                 Tank empty: {collectorData['et-tank-empty']}<br/>
+                Tank empty control: {collectorData['et-tank-empty-control']}<br/>
                 Pressure: {collectorData['et-pressure']}<br/>
                 Free heap: {collectorData['et-free-heap']}<br/>
               </p>
