@@ -3,6 +3,7 @@ import dataProvider from '../../../dataProvider';
 import DatePicker from 'react-datepicker';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import ClickableIconState from './ClikableIconState';
+import RunTimes from './RunTimes';
 
 export function ETControl(props) {
   const [collectorData, setCollectorData] = useState({});
@@ -177,8 +178,6 @@ export function ETControl(props) {
                 />
               </div>
               <h5>Control</h5>
-
-              <h6>
               <div className="btn-group btn-group-toggle">
                 <div className="input-group-prepend">
                   <ClickableIconState
@@ -215,7 +214,11 @@ export function ETControl(props) {
                   iconTypes={['lock', 'lock-open']}
                 />
               </div>
-              </h6>
+              <h5>Run times</h5>
+                <RunTimes
+                  lastRunTime={collectorData['et-last-run-time']}
+                  lastStopTime={collectorData['et-last-stop-time']}
+                />
             </td>
 
           </tr>
