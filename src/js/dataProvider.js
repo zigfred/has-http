@@ -125,6 +125,9 @@ const provider = {
     },
     command: function (data) {
       return axios.put("/esp/euroTank/command", data);
+    },
+    executeCommand: function(command) {
+      return axios.get("/esp/euroTank/executeCommand/" + command);
     }
   }
 };

@@ -17,7 +17,10 @@ import {
   faUpload,
   faCity,
   faPlug,
-  faWindowMaximize
+  faWindowMaximize,
+  faLock,
+  faLockOpen,
+  faHourglass
 } from '@fortawesome/free-solid-svg-icons'
 
 library.add(
@@ -31,7 +34,10 @@ library.add(
   faUpload,
   faCity,
   faPlug,
-  faWindowMaximize
+  faWindowMaximize,
+  faLock,
+  faLockOpen,
+  faHourglass
 );
 
 const wrapper = document.getElementById("root");

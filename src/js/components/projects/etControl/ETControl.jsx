@@ -1,25 +1,36 @@
 import React, { useState, useEffect } from 'react';
 import dataProvider from '../../../dataProvider';
 import DatePicker from 'react-datepicker';
-
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import ClickableIconState from './ClikableIconState';
 
 export function ETControl(props) {
   const [collectorData, setCollectorData] = useState({});
   const [commandData, setCommandData] = useState({});
+  const [toggleFillLoading, setToggleFillLoading] = useState(false);
+  const [togglePumpLoading, setTogglePumpLoading] = useState(false);
 
   const fetchData = () => {
     dataProvider.etControl.getData().then(result => {
       const { collector, command } = result.data;
-      setCollectorData(collector.data || {});
+      //setCollectorData(collector.data || {});
       setCommandData(command.settings || {});
+    });
+  }
+  const fetchDirectData = () => {
+    dataProvider.etControl.executeCommand('getData').then(result => {
+      const { data } = result.data;
+      setCollectorData(data || {});
     });
   }
 
   useEffect(() => {
     fetchData();
+    fetchDirectData();
     const interval = setInterval(() => {
       fetchData();
-    }, 15000);
+      fetchDirectData();
+    }, 3000);
     return () => clearInterval(interval);
   }, []);
 
@@ -59,6 +70,41 @@ export function ETControl(props) {
     updateCommand({
       startFillTime: time
     });
+  }
+
+  async function toggleFill(newState) {
+    setToggleFillLoading(true);
+    const command = newState ? 'openFill' : 'closeFill';
+    const result = await dataProvider.etControl.executeCommand(command);
+    const { data } = result.data;
+    setCollectorData(data);
+    setToggleFillLoading(false);
+  }
+  async function togglePump(newState) {
+    setTogglePumpLoading(true);
+    const command = newState ? 'runPump' : 'stopPump';
+    const result = await dataProvider.etControl.executeCommand(command);
+    const { data } = result.data;
+    setCollectorData(data);
+    setTogglePumpLoading(false);
+  }
+  async function toggleIrrigation() {
+    const command = collectorData['et-pump-run'] ? 'stopIrrigation' : 'startIrrigation';
+    const result = await dataProvider.etControl.executeCommand(command);
+    const { data } = result.data;
+    setCollectorData(data);
+  }
+  async function toggleIrrigate1(newState) {
+    const command = newState ? 'openIrrigate1' : 'closeIrrigate1';
+    const result = await dataProvider.etControl.executeCommand(command);
+    const { data } = result.data;
+    setCollectorData(data);
+  }
+  async function toggleIrrigate2(newState) {
+    const command = newState ? 'openIrrigate2' : 'closeIrrigate2';
+    const result = await dataProvider.etControl.executeCommand(command);
+    const { data } = result.data;
+    setCollectorData(data);
   }
 
   return (
@@ -130,6 +176,46 @@ export function ETControl(props) {
                   disabled={false}
                 />
               </div>
+              <h5>Control</h5>
+
+              <h6>
+              <div className="btn-group btn-group-toggle">
+                <div className="input-group-prepend">
+                  <ClickableIconState
+                    description={"Fill"}
+                    title={"Fill valve"}
+                    state={collectorData['et-fill-opened']}
+                    onChange={toggleFill}
+                    iconTypes={['lock', 'lock-open']}
+                    isLoading={toggleFillLoading}
+                  />
+                </div>
+                <div className="input-group-prepend cursor-pointer">
+                  <span className="input-group-text btn" onClick={toggleIrrigation}>
+                      {collectorData['et-pump-run'] ? "Stop" : "Start"} irrigation
+                  </span>
+                </div>
+                <ClickableIconState
+                  description={"Pump"}
+                  state={collectorData['et-pump-run']}
+                  onChange={togglePump}
+                  iconTypes={['lock', 'lock-open']}
+                  isLoading={togglePumpLoading}
+                />
+                <ClickableIconState
+                  description={"V1"}
+                  state={collectorData['et-irrigate1-opened']}
+                  onChange={toggleIrrigate1}
+                  iconTypes={['lock', 'lock-open']}
+                />
+                <ClickableIconState
+                  description={"V2"}
+                  state={collectorData['et-irrigate2-opened']}
+                  onChange={toggleIrrigate2}
+                  iconTypes={['lock', 'lock-open']}
+                />
+              </div>
+              </h6>
             </td>
 
           </tr>
