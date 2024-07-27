@@ -22,7 +22,7 @@ export function RunTimes(props) {
   return (
     <div>
       <div>last run time: {timeSinceLastRun} ago ({lastRunText}) </div>
-      <div>last run time: {timeSinceLastStop} ago ({lastStopText}) </div>
+      <div>last stop time: {timeSinceLastStop} ago ({lastStopText}) </div>
 
     </div>
   );
